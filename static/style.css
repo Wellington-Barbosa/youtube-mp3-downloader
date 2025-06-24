@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #121212;
+    color: #f1f1f1;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+input[type="url"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #019875;
+}
+
+.message {
+    margin-top: 15px;
+    color: #00ff99;
+}
+
+/* ... código anterior ... */
+
+.folder-section {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.folder-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.folder-section input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+}
+
+.loading {
+    margin-top: 15px;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.toast.error {
+    background-color: #e74c3c;
+}
+
+.toast.success {
+    background-color: #27ae60;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download de MP3 - YouTube</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Baixar MP3 do YouTube</h1>
+
+        <form id="downloadForm">
+            <input type="url" name="youtube_url" placeholder="Cole o link do YouTube aqui" required>
+
+            <div class="folder-section">
+                <label for="download_path">📁 Salvar os downloads em:</label>
+                <input type="text" name="download_path" placeholder="Ex: C:\Users\SeuNome\Downloads">
+                <small>Se deixar em branco, você poderá escolher na próxima tela.</small>
+            </div>
+
+            <button type="submit">Download MP3</button>
+        </form>
+
+        <div id="loading" class="loading" style="display: none;">
+            ⏳ Baixando... Por favor, aguarde.
+        </div>
+    </div>
+
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <script>
+        const form = document.getElementById('downloadForm');
+        const loading = document.getElementById('loading');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            loading.style.display = 'block';
+            toast.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                loading.style.display = 'none';
+                showToast(result.message, result.status);
+            } catch (error) {
+                loading.style.display = 'none';
+                showToast('Erro inesperado ao processar o download.', 'error');
+            }
+        });
+
+        function showToast(message, status) {
+            toast.innerText = message;
+            toast.className = 'toast ' + (status === 'success' ? 'success' : 'error');
+            toast.style.display = 'block';
+            toast.style.opacity = 1;
+
+            setTimeout(() => {
+                toast.style.opacity = 0;
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 500);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
